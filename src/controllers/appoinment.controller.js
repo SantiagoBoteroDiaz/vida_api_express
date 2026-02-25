@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+
 const client = new OpenAI();
 
 export const triage = async (req, res) => {
@@ -27,4 +28,5 @@ export const triage = async (req, res) => {
 
     res.status(200).json(JSON.parse(response.choices[0].message.content));
 
-}
+} 
+

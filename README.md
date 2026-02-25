@@ -2,6 +2,24 @@
 
 ## 📌 Objetivo
 
+> **Nota importante:** la aplicación depende de variables de entorno para
+> conectarse a PostgreSQL y definir el puerto. Crea un archivo `.env` en la
+> raíz con al menos estas claves:
+>
+> ```env
+> APP_PORT=4000             # puerto donde escuchará Express
+> DB_HOST=localhost         # host de PostgreSQL
+> DB_PORT=5432              # puerto de PostgreSQL
+> DB_USER=usuario           # usuario de la base de datos
+> DB_PWD=contraseña         # contraseña de la base de datos
+> DB_NAME=nombre_db         # nombre del esquema/basededatos
+> OPENAI_API_KEY=xxxxxxx    # (solo si usas el triage)
+> ```
+>
+> Si alguna de estas variables falta, el servidor puede fallar o responder con
+> errores 500 cuando se invoquen los endpoints.
+
+
 Implementar los **endpoints necesarios** para que el sistema de gestión de citas médicas funcione completamente, respetando:
 
 * El **ERD proporcionado**

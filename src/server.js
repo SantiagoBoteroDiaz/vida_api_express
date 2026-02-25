@@ -1,10 +1,17 @@
 import app from './app.js';
 import { env } from './config/env.js';
 
-app.listen(env.APP_PORT, () => {
+const port = env.APP_PORT ;
+
+if (!env.APP_PORT) {
+    console.warn('⚠️  APP_PORT no está definido. Usando puerto por defecto', port);
+}
+
+app.listen(port, () => {
     try {
-        console.log(`🚀 Servidor corriendo en puerto ${env.APP_PORT}`)
+        console.log(`🚀 Servidor corriendo en puerto ${port}`);
     } catch (error) {
         console.error('Error al iniciar el servidor:', error);
     }
 });
+

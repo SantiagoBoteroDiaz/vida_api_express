@@ -7,4 +7,4 @@ export const pool = new Pool({
     database: env.DB.NAME,
     user: env.DB.USER,
     password: env.DB.PASSWORD
-});
+}); 
