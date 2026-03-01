@@ -1,4 +1,4 @@
-import { pool } from "../config/dbconfig.js";
+import { pool } from "../config/database/pgConfig.js";
 
 export const create = async ({ name , create_date}) => {
     const query = 'insert into santiago_botero.patient(name, birth_date)values($1 , $2) RETURNING *;'; 

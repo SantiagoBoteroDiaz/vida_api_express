@@ -9,7 +9,7 @@ if (!env.APP_PORT) {
 
 app.listen(port, () => {
     try {
-        console.log(`🚀 Servidor corriendo en puerto ${port}`);
+        console.log(`Servidor corriendo en puerto ${port}`);
     } catch (error) {
         console.error('Error al iniciar el servidor:', error);
     }

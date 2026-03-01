@@ -1,4 +1,4 @@
-import { pool } from "../config/dbconfig.js"; 
+import { pool } from "../config/database/pgConfig.js";
 
 export const  getAllAppoiments = async () => { 
     const query = `

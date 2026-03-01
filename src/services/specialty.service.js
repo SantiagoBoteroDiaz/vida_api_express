@@ -1,6 +1,6 @@
-import { pool } from "../config/dbconfig.js";
+import { pool } from "../config/database/pgConfig.js";
 
-export const create = async ({ name }) => {
+export const create = async ( name ) => {
     const query = 'insert into santiago_botero.specialty(name)values($1) RETURNING *;'; 
     const values = [name]; 
 
