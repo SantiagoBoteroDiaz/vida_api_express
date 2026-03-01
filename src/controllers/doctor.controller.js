@@ -1,4 +1,4 @@
-import { createDoctor, getAllDoctors } from "../services/doctor.service.js";
+import { createDoctor, getAllDoctors, getDoctorsBySpecialty , doctorDelete } from "../services/doctor.service.js";
 
 export const create = async (req, res) => {
 
@@ -29,5 +29,33 @@ export const getAll = async (req, res) => {
         console.error('Error al obtener los doctores:', error);
         res.status(500).json({ error: error.message });
     }
+};
 
+
+export const getDoctorSpecialty = async (req, res) => {
+    const {specialty_id} = req.params ; 
+    try {
+        const doctors = await getDoctorsBySpecialty(specialty_id);
+        res.status(200).json({ response: doctors });
+    } catch (error) {
+        console.error('Error al obtener los doctores:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const deleteDoctor = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleted = await doctorDelete(id);
+    if (deleted === 0) {
+      return res.status(404).json({ error: "Doctor no encontrado" });
+    }
+    return res.status(200).json({
+      message: "Doctor eliminado correctamente",
+    });
+    
+  } catch (error) {
+    console.error("error al eliminar el doctor", error);
+    return res.status(500).json({ error: "Error interno" });
+  }
 };

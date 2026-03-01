@@ -1,13 +1,8 @@
 import { pool } from "../config/dbconfig.js";
 
-// The original code queried the `test` schema; the rest of the project uses
-// `santiago_botero`.  Using the wrong schema will cause SQL errors (table not
-// found) and make the `/doctors` endpoints fail with 500s.  Update both the
-// stored procedure call and the SELECT to the correct schema.  Adjust as
-// needed if your database uses a different schema name.
 export const createDoctor = async ({ name, specialty }) => {
 
-    const query = 'CALL santiago_botero.sp_create_doctor($1::text, $2::text, null, null)';
+    const query = 'CALL test.sp_create_doctor($1::text, $2::text, null, null)';
     const values = [name, specialty];
 
     try {
@@ -34,4 +29,39 @@ export const getAllDoctors = async () => {
         throw error;
     }
 
+}
+
+export const  getDoctorsBySpecialty = async(id) =>{
+    const value = [id] 
+    const query = ` select d.id, d.name , s."name" 
+    from santiago_botero.doctor d 
+    inner join specialty s on d.speciality_id = s.id 
+    where d.speciality_id  = $1;` 
+
+    try {
+        const response = await pool.query(query, value) 
+    } catch(error) { 
+        console.error(error); 
+        throw error  
+    }
+} 
+
+export const  doctorDelete = async(id) =>{
+    const value = [id] 
+    const query = `delete from santiago_botero.doctor d where d.id = $1` 
+    try {
+        const response = await pool.query(query, value) ;
+        return response.rowCount;
+    } catch(error) { 
+        console.error(error); 
+        throw error  
+    }
+} 
+
+export const updateDoctor = async (id, {name , specialty_id}) => { 
+    const query = `
+    update santiago_botero.doctor 
+    set name = $1 ,
+        specialty_id = (select name f)
+    `
 }

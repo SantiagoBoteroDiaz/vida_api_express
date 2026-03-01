@@ -2,21 +2,19 @@ import express from 'express';
 import { doctorRoutes } from './routes/doctor.route.js';
 import { specialtyRoutes } from './routes/specialty.route.js';
 import {patientRoutes} from './routes/patient.route.js'
-import { appointmentRoutes } from "./routes/appoinment.route.js"  // intentionally spelled the same as file
+import { appointmentsRoutes } from './routes/appointment.routes.js';
+
+// app tiene que llevar express y luego se le coloca la config para enviar info
 
 const app = express();
+
+// comando para usar formato json para enviar info 
 
 app.use(express.json());
 
 app.use('/doctors', doctorRoutes);
 app.use('/specialties', specialtyRoutes);
 app.use('/patients' , patientRoutes);
-// ruta de triage (POST /triage)
-app.use('/triage', appointmentRoutes);
-
-app.get('/test', (req, res) => {
-    console.log("Test ejecutado");
-    res.send("TEST OK");
-});
+app.use('/appointment', appointmentsRoutes)
 
 export default app;
